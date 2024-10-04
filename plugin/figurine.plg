@@ -4,7 +4,7 @@
 <PLUGIN 
   name="figurine"
   author="Derek Kaser"
-  version="0.0.1"
+  version="0.0.2"
   pluginURL="https://raw.githubusercontent.com/dkaser/unraid-figurine/main/plugin/figurine.plg"
   support="https://github.com/dkaser/unraid-figurine/issues"
   min="6.11.5"
@@ -13,20 +13,20 @@
 
 <CHANGES>
 <![CDATA[
-###0.0.1###
+###0.0.2###
 
 
 For older releases, see https://github.com/dkaser/unraid-figurine/releases
 ]]>
 </CHANGES>
 
-<FILE Name="/boot/config/plugins/figurine/unraid-figurine-0.0.1-noarch-1.txz">
-<URL>https://github.com/dkaser/unraid-figurine/releases/download/0.0.1/unraid-figurine-0.0.1-noarch-1.txz</URL>
-<SHA256>45f50665208ba5f0224014dd09b193c98d784fb73c995080c4ab48a17fead40d</SHA256>
+<FILE Name="/boot/config/plugins/figurine/unraid-figurine-0.0.2-noarch-1.txz">
+<URL>https://github.com/dkaser/unraid-figurine/releases/download/0.0.2/unraid-figurine-0.0.2-noarch-1.txz</URL>
+<SHA256>a7b45b89f9cdb2588bc89b049fbe9e3aaf9f6124c5dd13cb6dc9f1237e79a98e</SHA256>
 </FILE>
 
 <FILE Name="/boot/config/plugins/figurine/figurine_linux_amd64_v1.3.0.tar.gz">
-<URL>hhttps://github.com/arsham/figurine/releases/download/v1.3.0//figurine_linux_amd64_v1.3.0.tar.gz</URL>
+<URL>https://github.com/arsham/figurine/releases/download/v1.3.0/figurine_linux_amd64_v1.3.0.tar.gz</URL>
 <SHA256>e72430de0ca4b4b4548495d803856f5fec223f43c59a97a0bfcc714710d5032a</SHA256>
 </FILE>
 
@@ -38,15 +38,15 @@ The 'install' script.
 <![CDATA[
 tar xf /boot/config/plugins/figurine/figurine_linux_amd64_v1.3.0.tar.gz -C /usr/local/bin/ --strip-components=1 deploy/figurine
 
-upgradepkg --install-new /boot/config/plugins/figurine/unraid-figurine-0.0.1-noarch-1.txz
+upgradepkg --install-new /boot/config/plugins/figurine/unraid-figurine-0.0.2-noarch-1.txz
 
 # cleanup old versions
-rm -f $(ls /boot/config/plugins/figurine/unraid-figurine-*.txz 2>/dev/null | grep -v '0.0.1')
+rm -f $(ls /boot/config/plugins/figurine/unraid-figurine-*.txz 2>/dev/null | grep -v '0.0.2')
 
 echo ""
 echo "----------------------------------------------------"
 echo " figurine has been installed."
-echo " Version: 0.0.1"
+echo " Version: 0.0.2"
 echo "----------------------------------------------------"
 echo ""
 ]]>
