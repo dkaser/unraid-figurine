@@ -1,0 +1,70 @@
+<?xml version='1.0' standalone='yes'?>
+<!DOCTYPE PLUGIN>
+
+<PLUGIN 
+  name="{{ name }}"
+  author="Derek Kaser"
+  version="{{ version }}"
+  pluginURL="https://raw.githubusercontent.com/{{ githubRepository }}/main/plugin/{{ name }}.plg"
+  support="https://github.com/{{ githubRepository }}/issues"
+  min="6.11.5"
+  icon="fa-wrench"
+>
+
+<CHANGES>
+<![CDATA[
+###{{ version }}###
+{{ changelog }}
+
+For older releases, see https://github.com/{{ githubRepository }}/releases
+]]>
+</CHANGES>
+
+<FILE Name="{{ configDirectory }}/unraid-figurine-{{ version }}-noarch-1.txz">
+<URL>https://github.com/{{ githubRepository }}/releases/download/{{ version }}/unraid-figurine-{{ version }}-noarch-1.txz</URL>
+<SHA256>{{ checksum }}</SHA256>
+</FILE>
+
+<FILE Name="{{ configDirectory }}/figurine_linux_amd64_{{ figurineVersion }}.tar.gz">
+<URL>hhttps://github.com/arsham/figurine/releases/download/{{ figurineVersion }}//figurine_linux_amd64_{{ figurineVersion }}.tar.gz</URL>
+<SHA256>{{ figurineSHA256 }}</SHA256>
+</FILE>
+
+<!--
+The 'install' script.
+-->
+<FILE Run="/bin/bash">
+<INLINE>
+<![CDATA[
+tar xf {{ configDirectory }}/figurine_linux_amd64_{{ figurineVersion }}.tar.gz -C /usr/local/bin/ --strip-components=1 deploy/figurine
+
+upgradepkg --install-new {{ configDirectory }}/unraid-figurine-{{ version }}-noarch-1.txz
+
+# cleanup old versions
+rm -f $(ls {{ configDirectory }}/unraid-figurine-*.txz 2>/dev/null | grep -v '{{ version }}')
+
+echo ""
+echo "----------------------------------------------------"
+echo " {{ name }} has been installed."
+echo " Version: {{ version }}"
+echo "----------------------------------------------------"
+echo ""
+]]>
+</INLINE>
+</FILE>
+
+<!--
+The 'remove' script.
+-->
+<FILE Run="/bin/bash" Method="remove">
+<INLINE>
+<![CDATA[
+removepkg unraid-figurine
+
+rm -rf {{ pluginDirectory }}
+rm -rf {{ configDirectory }}
+]]>
+</INLINE>
+</FILE>
+
+</PLUGIN>
